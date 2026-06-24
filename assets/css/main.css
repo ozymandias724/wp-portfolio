@@ -1,0 +1,85 @@
+/* Main Styles */
+
+/* Header */
+
+header.wp-block-template-part {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+
+  background: rgba(17, 17, 17, 0.15);
+  backdrop-filter: blur(6px);
+
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+header.wp-block-template-part.scrolled {
+  background: rgba(17, 17, 17, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+/* 
+  Cover Block as Hero Pattern
+ */
+#hero-section {
+  position: relative;
+  margin-block-start: 0;
+}
+
+/* 
+  adds a radial "glow" effect and a linear gradient "fade" effect to the cover block
+ */
+#hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at 20% 35%,
+    rgba(137, 169, 188, 0.12),
+    transparent 45%
+  );
+
+  pointer-events: none;
+}
+
+#hero-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 200px;
+
+  pointer-events: none;
+  z-index: 1;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(17, 17, 17, 0.95) 100%
+  );
+}
+
+#hero-section .wp-block-cover__background {
+  z-index: -1;
+}
+
+#hero-section .wp-block-cover__inner-container {
+  position: relative;
+  z-index: 2;
+}
+
+#hero-section .vanta-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
