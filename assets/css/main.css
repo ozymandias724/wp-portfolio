@@ -1,10 +1,35 @@
 /* Main Styles */
 
+body {
+  --site-header-height: 4.75rem;
+  --wp-admin-bar-offset: 0px;
+}
+
+body.admin-bar {
+  --wp-admin-bar-offset: 32px;
+}
+
+@media (max-width: 781px) {
+  body {
+    --site-header-height: 4.5rem;
+  }
+}
+
+@media (max-width: 782px) {
+  body.admin-bar {
+    --wp-admin-bar-offset: 46px;
+  }
+}
+
+main {
+  padding-block-start: var(--site-header-height);
+}
+
 /* Header */
 
 header.wp-block-template-part {
   position: fixed;
-  top: 0;
+  top: var(--wp-admin-bar-offset);
   width: 100%;
   z-index: 100;
 
@@ -14,6 +39,12 @@ header.wp-block-template-part {
   transition:
     background 0.3s ease,
     backdrop-filter 0.3s ease;
+}
+
+@media (max-width: 782px) {
+  body.admin-bar header.wp-block-template-part.admin-bar-scrolled {
+    top: 0;
+  }
 }
 
 header.wp-block-template-part.scrolled {
@@ -82,4 +113,151 @@ header.wp-block-template-part.scrolled {
   height: 100% !important;
   margin: 0 !important;
   max-width: none !important;
+}
+
+/* Portfolio page intro. */
+body.page-portfolio header.wp-block-template-part,
+body.page-portfolio header.wp-block-template-part.scrolled {
+  background: #111111;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: 1px solid rgba(242, 240, 235, 0.12);
+}
+
+body.page-portfolio #hero-section {
+  min-height: clamp(26rem, 36vw, 36rem) !important;
+  padding-block: clamp(7rem, 12vw, 10rem) clamp(3rem, 7vw, 6rem);
+}
+
+body.page-portfolio #hero-section .wp-block-columns {
+  align-items: center;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+body.page-portfolio #hero-section h1 {
+  font-size: clamp(3.25rem, 8vw, 8rem);
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+
+body.page-portfolio #hero-section p {
+  max-width: 42ch;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  line-height: 1.55;
+}
+
+body.page-portfolio #hero-section p + p {
+  margin-block-start: 1rem;
+}
+
+/* Reusable project cards for Columns and Query Loop blocks. */
+.project-card-grid.wp-block-columns,
+body.page-portfolio .entry-content > .wp-block-columns {
+  align-items: stretch;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.project-card-grid.wp-block-columns > .wp-block-column,
+.project-card-grid.wp-block-query .wp-block-post-template > li,
+body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column {
+  min-width: 0;
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  border: 1px solid rgba(242, 240, 235, 0.1);
+  border-radius: 0.875rem;
+  background: #171a1c;
+}
+
+.project-card-grid :is(.wp-block-cover, .wp-block-image, .wp-block-post-featured-image) {
+  overflow: hidden;
+  margin-block: 0;
+  border-radius: 0.5rem;
+}
+
+.project-card-grid :is(.wp-block-cover video, .wp-block-image img, .wp-block-post-featured-image img),
+body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column > .wp-block-cover video,
+body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column > .wp-block-image img {
+  display: block;
+  width: 100%;
+}
+
+.project-card-grid :is(h2, .wp-block-post-title) {
+  margin-block-start: 1.25rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
+.project-card-grid :is(.wp-block-post-excerpt, p) {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.project-card-grid .wp-block-button__link {
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+body.page-portfolio #hero-section + .wp-block-spacer {
+  height: clamp(2rem, 6vw, 5rem) !important;
+  margin-block: 0;
+}
+
+@media (hover: hover) {
+  .project-card-grid.wp-block-columns > .wp-block-column,
+  .project-card-grid.wp-block-query .wp-block-post-template > li,
+  body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column {
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .project-card-grid.wp-block-columns > .wp-block-column:hover,
+  .project-card-grid.wp-block-query .wp-block-post-template > li:hover,
+  body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column:hover {
+    transform: translateY(-4px);
+    border-color: rgba(137, 169, 188, 0.55);
+  }
+}
+
+@media (max-width: 781px) {
+  body.page-portfolio #hero-section {
+    min-height: 0 !important;
+    padding-block: 6rem 2rem;
+  }
+
+  body.page-portfolio #hero-section .wp-block-columns {
+    gap: 1.5rem;
+  }
+
+  body.page-portfolio #hero-section h1 {
+    font-size: clamp(3.25rem, 14vw, 5rem);
+  }
+
+  .project-card-grid.wp-block-columns > .wp-block-column,
+  .project-card-grid.wp-block-query .wp-block-post-template > li,
+  body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column {
+    padding: 1rem;
+  }
+
+  .project-card-grid.wp-block-query .wp-block-post-template.is-layout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body.page-portfolio .entry-content > .wp-block-spacer {
+    height: 2rem !important;
+    margin-block: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .project-card-grid.wp-block-query .wp-block-post-template.is-layout-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-grid.wp-block-columns > .wp-block-column,
+  .project-card-grid.wp-block-query .wp-block-post-template > li,
+  body.page-portfolio .entry-content > .wp-block-columns > .wp-block-column {
+    transition: none;
+  }
 }

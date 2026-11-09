@@ -197,3 +197,32 @@ function wpstarter_assets()
 	);
 }
 add_action('wp_enqueue_scripts', 'wpstarter_assets');
+
+function wp_starter_portfolio_body_class($classes)
+{
+	if (is_page('portfolio')) {
+		$classes[] = 'page-portfolio';
+	}
+
+	return $classes;
+}
+add_filter('body_class', 'wp_starter_portfolio_body_class');
+
+function wp_starter_homepage_editor_background($editor_settings, $editor_context)
+{
+	$front_page_id = (int) get_option('page_on_front');
+
+	if (
+		$front_page_id
+		&& isset($editor_context->post)
+		&& $editor_context->post instanceof WP_Post
+		&& $editor_context->post->ID === $front_page_id
+	) {
+		$editor_settings['styles'][] = array(
+			'css' => '.editor-styles-wrapper { background-color: #fff; }',
+		);
+	}
+
+	return $editor_settings;
+}
+add_filter('block_editor_settings_all', 'wp_starter_homepage_editor_background', 10, 2);

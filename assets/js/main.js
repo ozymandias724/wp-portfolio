@@ -4,9 +4,21 @@ import FOG from "vanta/dist/vanta.fog.min";
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header.wp-block-template-part");
 
-  window.addEventListener("scroll", () => {
+  const updateHeader = () => {
+    const mobileAdminBar =
+      document.body.classList.contains("admin-bar") &&
+      window.innerWidth <= 782;
+
+    header.classList.toggle(
+      "admin-bar-scrolled",
+      mobileAdminBar && window.scrollY >= 46,
+    );
     header.classList.toggle("scrolled", window.scrollY > 75);
-  });
+  };
+
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  window.addEventListener("resize", updateHeader);
+  updateHeader();
 
   // Initialize Vanta.js effect on the hero section
   const hero = document.getElementById("hero-section");

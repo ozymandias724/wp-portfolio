@@ -6,3 +6,23 @@ a {
 	text-decoration-thickness: 1px !important;
 	text-underline-offset: .1em;
 }
+
+.editor-visual-editor__post-title-wrapper {
+	margin-block: 4rem 2.5rem !important;
+	padding-block: 1.5rem 2rem;
+	background: #fff;
+	border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+}
+
+.editor-visual-editor__post-title-wrapper .editor-post-title {
+	width: min(30rem, calc(100% - 2rem));
+	max-width: 100%;
+	margin: 0 auto !important;
+	padding: 0.25em 1.5em;
+	border: 1px solid rgba(17, 17, 17, 0.12);
+	border-radius: 999px;
+	background: #f7f7f7;
+	color: #111;
+	font-size: clamp(2rem, 4vw, 3rem);
+	text-align: center;
+}
