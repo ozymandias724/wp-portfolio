@@ -1,0 +1,9 @@
+header.wp-block-template-part:has(.wp-block-navigation__responsive-container.is-menu-open) {
+  backdrop-filter: none;
+  transition: none;
+}
+
+header.wp-block-template-part .wp-block-navigation__responsive-container.is-menu-open {
+  background-color: var(--wp--preset--color--background) !important;
+  color: var(--wp--preset--color--text) !important;
+}
